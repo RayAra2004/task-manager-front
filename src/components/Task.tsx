@@ -31,6 +31,10 @@ const SCTask = styled.tr`
         button{
             width: 100%;
             height: 30px;
+            background-color: var(--color-bg-button);
+            border: none;
+            border-radius: 3px;
+            color: #fff;
         }
     }
 
