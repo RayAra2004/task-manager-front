@@ -57,11 +57,7 @@ strong{
 :root {
   font-family: 'Poppins', sans-serif;
 
-  --color-text-primary: #222222;
-  --color-bg-input: #EDEDEF;
-  --color-bg-main: #EFEFEF;
-  --color-bg-cardInformation-primary: #4D4494;
-  --color-br-cardInformation-secundary: #4F43AE;
+  --color-bg-button: #e43bbf;
 }
 
 *{
