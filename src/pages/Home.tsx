@@ -1,11 +1,22 @@
 import styled from "styled-components";
 import Task from "../components/Task";
+import { useState } from "react";
+import CreateTask from "../components/CreateTask";
 
 export default function Home(){
+    const [createNewTask, setCreateNewTask] = useState(false);
+
+    function handleNewTask(){
+        setCreateNewTask(true);
+    }
+
     return(
         <SCHome>
+            {createNewTask &&
+                <CreateTask setCreateNewTask={setCreateNewTask}/>
+            }     
             <SCDivNewTask>
-                <SCBtnNewTask>Nova</SCBtnNewTask>
+                <SCBtnNewTask onClick={() => handleNewTask()}>Nova</SCBtnNewTask>
             </SCDivNewTask>
             <SCTasks>
                 <thead>
@@ -54,6 +65,7 @@ const SCBtnNewTask = styled.button`
     background-color: var(--color-bg-button);
     border: none;
     border-radius: 3px;
+    cursor: pointer;
 `
 
 const SCTasks = styled.table`
