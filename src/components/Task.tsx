@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { Task as TaskType}  from "../reducers/taskReducer";
 
-export default function Task(){
+type TaskProps = {
+    task: TaskType;
+}
+
+export default function Task(props: TaskProps){
+    const { task } = props;
+    console.log('io')
     return(
         <SCTask>
-            <td>Tarefa A</td>
-            <td>Pendente</td>
+            <td>{task.description}</td>
+            <td>{task.finished}</td>
             <td>
                 <span className="material-symbols-outlined">image</span>
             </td>

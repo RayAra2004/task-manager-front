@@ -1,10 +1,18 @@
 import styled from "styled-components";
 import Task from "../components/Task";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateTask from "../components/CreateTask";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTasksRequest } from '../actions/taskActions';
 
 export default function Home(){
     const [createNewTask, setCreateNewTask] = useState(false);
+    const dispatch = useDispatch();
+    const tasks = useSelector((state) => state.task.tasks);
+
+    useEffect(() => {
+        dispatch(fetchTasksRequest()); // Dispare a ação para buscar tarefas ao montar o componente
+    }, [dispatch]);
 
     function handleNewTask(){
         setCreateNewTask(true);
@@ -29,7 +37,11 @@ export default function Home(){
                     </tr>
                 </thead>
                 <tbody>
-                    <Task/>
+                    {
+                        tasks.map((task) => (
+                            <Task key={task.id} task={task}/>
+                        ))
+                    }
                 </tbody>
             </SCTasks>
         </SCHome>
