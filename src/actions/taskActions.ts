@@ -12,6 +12,10 @@ export const FINISH_TASK_REQUEST = 'FINISH_TASK_REQUEST';
 export const FINISH_TASK_SUCCESS = 'FINISH_TASK_SUCCESS';
 export const FINISH_TASK_FAILURE = 'FINISH_TASK_FAILURE';
 
+export const EDIT_TASK_REQUEST = 'EDIT_TASK_REQUEST';
+export const EDIT_TASK_SUCCESS = 'EDIT_TASK_SUCCESS';
+export const EDIT_TASK_FAILURE = 'EDIT_TASK_FAILURE';
+
 export const fetchTasksRequest = () => ({
   type: FETCH_TASKS_REQUEST,
 });
@@ -61,5 +65,26 @@ export const finishTaskSuccess = () => ({
 
 export const finishTaskFailure = (error: string) => ({
   type: FINISH_TASK_FAILURE,
+  payload: { error },
+});
+
+type TaskEdit = {
+  id: string;
+  description: string;
+  status: string;
+  image: File | string | undefined | null;
+}
+
+export const editTaskRequest = (taskData: TaskEdit) => ({
+  type: EDIT_TASK_REQUEST,
+  payload: { taskData },
+});
+
+export const editTaskSuccess = () => ({
+  type: EDIT_TASK_SUCCESS,
+});
+
+export const editTaskFailure = (error: string) => ({
+  type: EDIT_TASK_FAILURE,
   payload: { error },
 });

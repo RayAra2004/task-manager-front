@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from 'react-redux';
-import { createTaskRequest } from '../actions/taskActions';
+import { editTaskRequest } from '../actions/taskActions';
 import { Task as TaskType}  from "../reducers/taskReducer";
 import React, { useState } from "react";
 
@@ -20,10 +20,10 @@ export default function EditTask(props: CreateTaskProps){
     function handleSaveTask(e){
         e.preventDefault();
         // Certifique-se de ajustar isso conforme necessário
-        const taskData = { description, status: selectedStatus, imageFile: selectedFile };
+        const taskData = {id: task.id, description, status: selectedStatus, image: selectedFile };
 
         // Disparar a ação de criar tarefa
-        //dispatch(createTaskRequest(taskData));
+        dispatch(editTaskRequest(taskData));
 
         setIsEditing(false);
     }

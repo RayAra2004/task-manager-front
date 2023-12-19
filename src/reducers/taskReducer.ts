@@ -9,6 +9,9 @@ import {
     FINISH_TASK_REQUEST,
     FINISH_TASK_SUCCESS,
     FINISH_TASK_FAILURE,
+    EDIT_TASK_REQUEST,
+    EDIT_TASK_SUCCESS,
+    EDIT_TASK_FAILURE,
   } from '../actions/taskActions';
   
 
@@ -58,9 +61,18 @@ switch (action.type) {
     
     case FINISH_TASK_FAILURE:
       return { ...state, loading: false, error: action.payload.error }
+    
+    case EDIT_TASK_REQUEST:
+      return { ...state, loading: true, error: null };
+    
+    case EDIT_TASK_SUCCESS:
+      return { ...state, loading: false };
+    
+    case EDIT_TASK_FAILURE:
+      return { ...state, loading: false, error: action.payload.error }
 
     default:
-    return state;
+      return state;
 }
 };
 
