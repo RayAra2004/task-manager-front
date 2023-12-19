@@ -3,6 +3,7 @@ import { Task as TaskType}  from "../reducers/taskReducer";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { finishTaskRequest } from "../actions/taskActions";
+import EditTask from "./EditTask";
 
 type TaskProps = {
     task: TaskType;
@@ -12,6 +13,7 @@ export default function Task(props: TaskProps){
     const { task } = props;
     const status = task.status;
     const [imageSrc, setImageSrc] = useState<string | null>(null);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -59,37 +61,43 @@ export default function Task(props: TaskProps){
         }
     }
 
-    function handlerFinidhTask(){
+    function handlerFinishTask(){
         if(status === "PENDING"){
             dispatch(finishTaskRequest({id: task.id}));
         }
     }
 
     return(
-        <SCTask>
-            <td>{task.description}</td>
-            <td>{showStaus()}</td>
-            <td>
+        <>
+            {isEditing ? (
+                <EditTask setIsEditing={setIsEditing} task={task}/>
+            ) : (
+                <SCTask>
+                <td>{task.description}</td>
+                <td>{showStaus()}</td>
+                <td>
+                    {
+                        imageSrc && <span className="material-symbols-outlined" onClick={() => openImage()}>image</span>
+                    }
+                    
+                </td>
                 {
-                    imageSrc && <span className="material-symbols-outlined" onClick={() => openImage()}>image</span>
+                status === "PENDING" ?  (
+                    <td className="pencil-icon">
+                        <span className="material-symbols-outlined" onClick={() => setIsEditing(true)}>edit</span>
+                    </td>
+                    ): 
+                    <td></td>
                 }
                 
-            </td>
-            {
-               status === "PENDING" ?  (
-                <td className="pencil-icon">
-                    <span className="material-symbols-outlined">edit</span>
+                <td>
+                    <SCButton status={status} onClick={() => handlerFinishTask()}>
+                        {status === "PENDING"? "Concluir" : "Finalizada"}
+                    </SCButton>
                 </td>
-                ): 
-                <td></td>
-            }
-            
-            <td>
-                <SCButton status={status} onClick={() => handlerFinidhTask()}>
-                    {status === "PENDING"? "Concluir" : "Finalizada"}
-                </SCButton>
-            </td>
-        </SCTask>
+            </SCTask>
+            )}
+        </>  
     );
 }
 
