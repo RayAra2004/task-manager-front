@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { createTaskRequest } from '../actions/taskActions';
+import React, { useState } from "react";
 
 interface CreateTaskProps {
     setCreateNewTask: React.Dispatch<React.SetStateAction<boolean>>;
@@ -6,29 +9,49 @@ interface CreateTaskProps {
 
 export default function CreateTask(props: CreateTaskProps){
     const { setCreateNewTask } = props;
+    const dispatch = useDispatch();
 
-    function handleSaveTask(){
+    const [description, setDescription] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState('pending');
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    function handleSaveTask(e){
+        e.preventDefault();
+        // Certifique-se de ajustar isso conforme necessário
+        const taskData = { description, status: selectedStatus, imageFile: selectedFile };
+
+        // Disparar a ação de criar tarefa
+        dispatch(createTaskRequest(taskData));
+
         setCreateNewTask(false);
     }
+
+    const handleFileChange = (event) => {
+        // Verifica se algum arquivo foi selecionado
+        if (event.target.files.length > 0) {
+          const file = event.target.files[0];
+          setSelectedFile(file);
+        }
+    };
     
     return(
         <SCDivCreateTask>
             <div>
                 <h1>Nova Tarefa</h1>
                 <SCFormNewTask>
-                    <input type="text" className="description" placeholder="Descrição" required/>
-                    <select name="" id="">
+                    <input type="text" value={description} onChange={e => setDescription(e.target.value)} className="description" placeholder="Descrição" required/>
+                    <select name="" id="" value={selectedStatus} onChange={e => setSelectedStatus(e.target.value)}>
                         <option value="pending">Pendente</option>
                         <option value="finished">Finalizada</option>
                     </select>
                     <div className="div-image-upload">
-                        <input type="file" id="image-upload" />
+                        <input type="file" id="image-upload" onChange={handleFileChange}/>
                         <label htmlFor="image-upload">
                             <span className="material-symbols-outlined">start</span>
                             <p>Imagem</p>
                         </label>
                     </div>
-                    <button onClick={() => handleSaveTask()}>Salvar</button>
+                    <button onClick={(e) => handleSaveTask(e)}>Salvar</button>
                 </SCFormNewTask>
             </div>
         </SCDivCreateTask>

@@ -7,7 +7,7 @@ type TaskProps = {
 
 export default function Task(props: TaskProps){
     const { task } = props;
-    console.log('io')
+
     return(
         <SCTask>
             <td>{task.description}</td>

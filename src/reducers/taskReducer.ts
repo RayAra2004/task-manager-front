@@ -3,6 +3,9 @@ import {
     FETCH_TASKS_REQUEST,
     FETCH_TASKS_SUCCESS,
     FETCH_TASKS_FAILURE,
+    CREATE_TASK_REQUEST,
+    CREATE_TASK_SUCCESS,
+    CREATE_TASK_FAILURE,
   } from '../actions/taskActions';
   
 
@@ -34,6 +37,15 @@ switch (action.type) {
 
     case FETCH_TASKS_FAILURE:
     return { ...state, loading: false, error: action.payload.error };
+
+    case CREATE_TASK_REQUEST:
+      return { ...state, loading: true, error: null };
+    
+    case CREATE_TASK_SUCCESS:
+      return { ...state, loading: false };
+    
+    case CREATE_TASK_FAILURE:
+      return { ...state, loading: false, error: action.payload.error }
 
     default:
     return state;
