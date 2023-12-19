@@ -12,7 +12,7 @@ import {
 export interface Task {
   id: number;
   description: string;
-  finished: boolean;
+  status: string;
   image?: string;
 }
 interface TaskState {

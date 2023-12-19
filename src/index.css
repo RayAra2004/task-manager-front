@@ -57,7 +57,8 @@ strong{
 :root {
   font-family: 'Poppins', sans-serif;
 
-  --color-bg-button: #e43bbf;
+  --color-bg-button: rgb(228, 59, 191);
+  --color-bg-button-transparent: rgb(228, 59, 191, 0.5);
 }
 
 *{
