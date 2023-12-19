@@ -23,7 +23,7 @@ function* finishTask(action: TaskAction) {
     const { taskData } = action.payload as FinishTaskRequestActionPayload;
     
 
-    yield call(fetch, `http://localhost:8080/task/finish/${taskData.id}`, {
+    yield call(fetch, `${import.meta.env.VITE_API_BASE_URL}/finish/${taskData.id}`, {
       method: 'POST',
     });
 

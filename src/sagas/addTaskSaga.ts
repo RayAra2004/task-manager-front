@@ -30,7 +30,7 @@ function* addTask(action: TaskAction) {
       formData.append('image', taskData.imageFile);
     }
 
-    yield call(fetch, 'http://localhost:8080/task/', {
+    yield call(fetch, `${import.meta.env.VITE_API_BASE_URL}/`, {
       method: 'POST',
       body: formData,
     });

@@ -9,7 +9,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function* fetchTasks(_action: unknown) {
   try {
-    const response = yield call(fetch, `http://localhost:8080/task/`);
+    const response = yield call(fetch, `${import.meta.env.VITE_API_BASE_URL}/`);
     const data = yield response.json();
     yield put(fetchTasksSuccess(data));
   } catch (error) {
