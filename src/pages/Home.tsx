@@ -33,24 +33,26 @@ export default function Home(){
             <SCDivNewTask>
                 <SCBtnNewTask onClick={() => handleNewTask()}>Nova</SCBtnNewTask>
             </SCDivNewTask>
-            <SCTasks>
-                <thead>
-                    <tr>
-                        <th>Tarefa</th>
-                        <th>Status</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        tasks.map((task) => (
-                            <Task key={task.id} task={task}/>
-                        ))
-                    }
-                </tbody>
-            </SCTasks>
+            <SCTasksContainer>
+                <SCTasks>
+                    <thead>
+                        <tr>
+                            <th>Tarefa</th>
+                            <th>Status</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            tasks.map((task) => (
+                                <Task key={task.id} task={task}/>
+                            ))
+                        }
+                    </tbody>
+                </SCTasks>
+            </SCTasksContainer>
         </SCHome>
     );
 }
@@ -85,6 +87,16 @@ const SCBtnNewTask = styled.button`
     border: none;
     border-radius: 3px;
     cursor: pointer;
+`
+
+const SCTasksContainer = styled.div`
+    max-height: 80vh;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
 const SCTasks = styled.table`
