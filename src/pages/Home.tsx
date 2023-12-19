@@ -4,11 +4,18 @@ import { useEffect, useState } from "react";
 import CreateTask from "../components/CreateTask";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasksRequest } from '../actions/taskActions';
+import { Task as TaskType } from "../reducers/taskReducer";
+
+interface RootState{
+    task:{
+        tasks: TaskType[];
+    }
+}
 
 export default function Home(){
     const [createNewTask, setCreateNewTask] = useState(false);
     const dispatch = useDispatch();
-    const tasks = useSelector((state) => state.task.tasks);
+    const tasks = useSelector((state: RootState) => state.task.tasks);
 
     useEffect(() => {
         dispatch(fetchTasksRequest()); // Dispare a ação para buscar tarefas ao montar o componente

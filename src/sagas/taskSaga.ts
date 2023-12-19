@@ -1,4 +1,3 @@
-// taskSaga.ts
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   FETCH_TASKS_REQUEST,
@@ -6,7 +5,9 @@ import {
   fetchTasksFailure,
 } from '../actions/taskActions';
 
-function* fetchTasks(action: any) {
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function* fetchTasks(_action: unknown) {
   try {
     const response = yield call(fetch, `http://localhost:8080/task/`);
     const data = yield response.json();

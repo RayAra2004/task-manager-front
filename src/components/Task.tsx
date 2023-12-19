@@ -18,6 +18,7 @@ export default function Task(props: TaskProps){
 
     useEffect(() => {
         renderImg();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
     function showStaus(){

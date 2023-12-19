@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useDispatch } from 'react-redux';
 import { createTaskRequest } from '../actions/taskActions';
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 
 interface CreateTaskProps {
     setCreateNewTask: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,9 +13,9 @@ export default function CreateTask(props: CreateTaskProps){
 
     const [description, setDescription] = useState("");
     const [selectedStatus, setSelectedStatus] = useState('pending');
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-    function handleSaveTask(e){
+    function handleSaveTask(e: FormEvent){
         e.preventDefault();
         // Certifique-se de ajustar isso conforme necessário
         const taskData = { description, status: selectedStatus, imageFile: selectedFile };
@@ -26,11 +26,13 @@ export default function CreateTask(props: CreateTaskProps){
         setCreateNewTask(false);
     }
 
-    const handleFileChange = (event) => {
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         // Verifica se algum arquivo foi selecionado
-        if (event.target.files.length > 0) {
+        if (event.target.files && event.target.files.length > 0) {
           const file = event.target.files[0];
           setSelectedFile(file);
+        }else{
+            setSelectedFile(null);
         }
     };
     

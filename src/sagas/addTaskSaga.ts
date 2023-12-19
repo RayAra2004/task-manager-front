@@ -5,10 +5,24 @@ import {
     createTaskFailure,
     fetchTasksRequest,
 } from '../actions/taskActions';
+import { ActionType } from 'typesafe-actions';
+import * as taskActions from '../actions/taskActions';
 
-function* addTask(action: any) {
+interface CreateTaskRequestActionPayload {
+  taskData: {
+    description: string;
+    status: string;
+    imageFile?: File | null;
+  };
+}
+
+export type CreateTaskRequestAction = ActionType<typeof taskActions.createTaskRequest>;
+
+export type TaskAction = CreateTaskRequestAction;
+
+function* addTask(action: TaskAction) {
   try {
-    const { taskData } = action.payload;
+    const { taskData } = action.payload as CreateTaskRequestActionPayload;
     const formData = new FormData();
     formData.append('description', taskData.description);
     formData.append('status', taskData.status);
@@ -23,7 +37,7 @@ function* addTask(action: any) {
 
     yield put(createTaskSuccess());
     yield put(fetchTasksRequest());
-  } catch (error) {
+  } catch (error: unknown) {
     yield put(createTaskFailure(error.message));
   }
 }

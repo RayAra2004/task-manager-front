@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useDispatch } from 'react-redux';
 import { editTaskRequest } from '../actions/taskActions';
 import { Task as TaskType}  from "../reducers/taskReducer";
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 
 interface CreateTaskProps {
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,9 +15,9 @@ export default function EditTask(props: CreateTaskProps){
 
     const [description, setDescription] = useState(task.description);
     const [selectedStatus, setSelectedStatus] = useState(task.status);
-    const [selectedFile, setSelectedFile] = useState(task.image);
+    const [selectedFile, setSelectedFile] = useState<File | null | undefined>(task.image);
 
-    function handleSaveTask(e){
+    function handleSaveTask(e: FormEvent){
         e.preventDefault();
         // Certifique-se de ajustar isso conforme necessário
         const taskData = {id: task.id, description, status: selectedStatus, image: selectedFile };
@@ -28,11 +28,13 @@ export default function EditTask(props: CreateTaskProps){
         setIsEditing(false);
     }
 
-    const handleFileChange = (event) => {
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         // Verifica se algum arquivo foi selecionado
-        if (event.target.files.length > 0) {
+        if (event.target.files && event.target.files.length > 0) {
           const file = event.target.files[0];
           setSelectedFile(file);
+        }else{
+            setSelectedFile(null);
         }
     };
     

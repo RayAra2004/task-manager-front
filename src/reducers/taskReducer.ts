@@ -1,4 +1,5 @@
 // userReducer.ts
+import { Action } from 'redux';
 import {
     FETCH_TASKS_REQUEST,
     FETCH_TASKS_SUCCESS,
@@ -19,7 +20,7 @@ export interface Task {
   id: string;
   description: string;
   status: string;
-  image?: string;
+  image?: File;
 }
 interface TaskState {
   tasks: Task[];
@@ -33,7 +34,44 @@ const initialState: TaskState = {
   error: null,
 };
 
-const taskReducer = (state = initialState, action: any) => {
+interface GenericAction<T extends string, P> extends Action<T> {
+  payload: P;
+}
+
+export interface FetchTasksRequestAction extends GenericAction<typeof FETCH_TASKS_REQUEST, object> {}
+export interface FetchTasksSuccessAction extends GenericAction<typeof FETCH_TASKS_SUCCESS, { tasks: Task[] }> {}
+export interface FetchTasksFailureAction extends GenericAction<typeof FETCH_TASKS_FAILURE, { error: string }> {}
+
+export interface CreateTaskRequestAction extends GenericAction<typeof CREATE_TASK_REQUEST, object> {}
+export interface CreateTaskSuccessAction extends GenericAction<typeof CREATE_TASK_SUCCESS, object> {}
+export interface CreateTaskFailureAction extends GenericAction<typeof CREATE_TASK_FAILURE, { error: string }> {}
+
+export interface FinishTaskRequestAction extends GenericAction<typeof FINISH_TASK_REQUEST, object> {}
+export interface FinishTaskSuccessAction extends GenericAction<typeof FINISH_TASK_SUCCESS, object> {}
+export interface FinishTaskFailureAction extends GenericAction<typeof FINISH_TASK_FAILURE, { error: string }> {}
+
+export interface EditTaskRequestAction extends GenericAction<typeof EDIT_TASK_REQUEST, object> {}
+export interface EditTaskSuccessAction extends GenericAction<typeof EDIT_TASK_SUCCESS, object> {}
+export interface EditTaskFailureAction extends GenericAction<typeof EDIT_TASK_FAILURE, { error: string }> {}
+
+// Tipo de todas as ações
+type TaskActions =
+  | FetchTasksRequestAction
+  | FetchTasksSuccessAction
+  | FetchTasksFailureAction
+  | CreateTaskRequestAction
+  | CreateTaskSuccessAction
+  | CreateTaskFailureAction
+  | FinishTaskRequestAction
+  | FinishTaskSuccessAction
+  | FinishTaskFailureAction
+  | EditTaskRequestAction
+  | EditTaskSuccessAction
+  | EditTaskFailureAction;
+
+export type { TaskActions };
+
+const taskReducer = (state = initialState, action: TaskActions) => {
 switch (action.type) {
     case FETCH_TASKS_REQUEST:
     return { ...state, loading: true, error: null };

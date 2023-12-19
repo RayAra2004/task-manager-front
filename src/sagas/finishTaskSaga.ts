@@ -5,10 +5,22 @@ import {
     finishTaskFailure,
     fetchTasksRequest,
 } from '../actions/taskActions';
+import { ActionType } from 'typesafe-actions';
+import * as taskActions from '../actions/taskActions';
 
-function* finishTask(action: any) {
+interface FinishTaskRequestActionPayload {
+  taskData: {
+    id: string;
+  };
+}
+
+export type FinishTaskRequestAction = ActionType<typeof taskActions.finishTaskRequest>;
+
+export type TaskAction = FinishTaskRequestAction;
+
+function* finishTask(action: TaskAction) {
   try {
-    const { taskData } = action.payload;
+    const { taskData } = action.payload as FinishTaskRequestActionPayload;
     
 
     yield call(fetch, `http://localhost:8080/task/finish/${taskData.id}`, {

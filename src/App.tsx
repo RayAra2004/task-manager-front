@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import { Provider } from "react-redux";
-import UserSearchContainer from "./containers/UserSearchContainer";
 import store from "./store/configureStore";
 
 function App() {
