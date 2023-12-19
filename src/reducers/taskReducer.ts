@@ -6,11 +6,14 @@ import {
     CREATE_TASK_REQUEST,
     CREATE_TASK_SUCCESS,
     CREATE_TASK_FAILURE,
+    FINISH_TASK_REQUEST,
+    FINISH_TASK_SUCCESS,
+    FINISH_TASK_FAILURE,
   } from '../actions/taskActions';
   
 
 export interface Task {
-  id: number;
+  id: string;
   description: string;
   status: string;
   image?: string;
@@ -45,6 +48,15 @@ switch (action.type) {
       return { ...state, loading: false };
     
     case CREATE_TASK_FAILURE:
+      return { ...state, loading: false, error: action.payload.error }
+    
+    case FINISH_TASK_REQUEST:
+      return { ...state, loading: true, error: null };
+    
+    case FINISH_TASK_SUCCESS:
+      return { ...state, loading: false };
+    
+    case FINISH_TASK_FAILURE:
       return { ...state, loading: false, error: action.payload.error }
 
     default:

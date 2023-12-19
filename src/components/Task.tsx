@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Task as TaskType}  from "../reducers/taskReducer";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { finishTaskRequest } from "../actions/taskActions";
 
 type TaskProps = {
     task: TaskType;
@@ -10,6 +12,7 @@ export default function Task(props: TaskProps){
     const { task } = props;
     const status = task.status;
     const [imageSrc, setImageSrc] = useState<string | null>(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         renderImg();
@@ -36,9 +39,9 @@ export default function Task(props: TaskProps){
                 if (imageUrl !== imageSrc) {
                   setImageSrc(imageUrl);
                 }
-              } catch (error) {
-                console.error('Erro ao renderizar a imagem:', error);
-              }
+            } catch (error) {
+            console.error('Erro ao renderizar a imagem:', error);
+            }
         }   
     }
     
@@ -53,8 +56,14 @@ export default function Task(props: TaskProps){
                 imageWindow.document.body.appendChild(img);
               };
             }
-          }
-      }
+        }
+    }
+
+    function handlerFinidhTask(){
+        if(status === "PENDING"){
+            dispatch(finishTaskRequest({id: task.id}));
+        }
+    }
 
     return(
         <SCTask>
@@ -76,7 +85,7 @@ export default function Task(props: TaskProps){
             }
             
             <td>
-                <SCButton status={status}>
+                <SCButton status={status} onClick={() => handlerFinidhTask()}>
                     {status === "PENDING"? "Concluir" : "Finalizada"}
                 </SCButton>
             </td>
