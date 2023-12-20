@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+# Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação onde se é possível gerenciar suas tarefas, nela você terá o controler de tudo o que precisa fazer no dia a dia. 
 
-Currently, two official plugins are available:
+![image](https://github.com/RayAra2004/task-manager-front/assets/91473437/05e57c8a-651a-4d44-a54a-23d6eca10db9)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<details>
+  <summary><h4><b>Variáveis de ambiente</b></h4></summary>
+  
+  - VITE_API_BASE_URL=Seu link do conexão com a API. Para saber mais acesse: [Task Manager Back](https://github.com/RayAra2004/task-manager-back)
+  
+</details>
 
-## Expanding the ESLint configuration
+## Como rodar o projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone este repositório.
+2. Instale as dependências usando `npm install`.
+3. Configure as variáveis de ambiente em um arquivo chamado `.env` na raiz do projeto, conforme o `.env.example`.
+4. Execute a aplicação usando `npm run dev`.
+5. Acesse o site no link disponibilizado no terminal.
 
-- Configure the top-level `parserOptions` property like this:
+## Tecnologias utilizadas
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- React
+- TypeScript
+- Redux
+- Redux-Saga
