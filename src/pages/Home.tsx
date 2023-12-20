@@ -97,6 +97,7 @@ const SCTasksContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 40px;
 `
 
 const SCTasks = styled.table`

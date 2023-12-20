@@ -144,12 +144,16 @@ const SCFormNewTask = styled.form`
     button{
         width: 120px;
         height: 35px;
-        margin: 100px auto;
+        margin: 8px auto;
         background-color: var(--color-bg-button);
         border: none;
         border-radius: 3px;
         color: #fff;
         font-weight: bolder;
         cursor: pointer;
+
+        @media (min-width: 1440px) {
+            margin: 30px auto;
+        }
     }
 `

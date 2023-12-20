@@ -39,7 +39,8 @@ function* editTask(action: TaskAction) {
 
     yield put(editTaskSuccess());
     yield put(fetchTasksRequest());
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     yield put(editTaskFailure(error.message));
   }
 }

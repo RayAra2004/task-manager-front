@@ -6,13 +6,14 @@ import {
 } from '../actions/taskActions';
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function* fetchTasks(_action: unknown) {
-  try {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+function* fetchTasks(_action: unknown): Generator<any, void, any> {
+  try {   
     const response = yield call(fetch, `${import.meta.env.VITE_API_BASE_URL}/`);
     const data = yield response.json();
     yield put(fetchTasksSuccess(data));
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     yield put(fetchTasksFailure(error.message));
   }
 }

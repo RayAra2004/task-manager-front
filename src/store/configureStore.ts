@@ -8,7 +8,8 @@ const rootReducer = combineReducers({
 });
 
 const sagaMiddleware = createSagaMiddleware();
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-expect-error
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
